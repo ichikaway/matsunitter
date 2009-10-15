@@ -85,8 +85,8 @@ class DATABASE_CONFIG {
 		'login' => 'findtwitter',
 		'password' => 'findtwitter',
 		'database' => 'findtwitter',
-		'prefix' => ''
-//		,'encoding'=>'utf8'
+		'prefix' => '',
+		'encoding'=>'utf8'
 	);
 
 	var $test = array(
@@ -96,8 +96,8 @@ class DATABASE_CONFIG {
 		'login' => 'findtwitter',
 		'password' => 'findtwitter',
 		'database' => 'findtwitter',
-		'prefix' => 'test_suite_'
-//		,'encoding'=>'utf8'
+		'prefix' => 'test_suite_',
+		'encoding'=>'utf8'
 	);
 }
 ?>
