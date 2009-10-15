@@ -13,6 +13,9 @@ Released for free under a Creative Commons Attribution 2.5 License
 <link href="/css/default.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+<div id="sidebar">
+    <?php echo $this->element('sidebar'); ?>
+</div>
 <div id="container">
 	<div id="header">
 		<h1><?php echo $html->link('findTwitter', array('controller' => 'search', 'action' => 'index')); ?></h1>
