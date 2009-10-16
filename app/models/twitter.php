@@ -49,8 +49,13 @@ class Twitter extends AppModel {
               'rpp' => $limit,
               'lang' => Set::extract('lang', $conditions),
              );
+    $request = array(
+      'header' => array(
+        'User-Agent' => 'findTwitter'
+      )
+    );
 
-    $ret = $HttpSocket->get(self::API_SEARCH, $query);
+    $ret = $HttpSocket->get(self::API_SEARCH, $query, $request);
 
     if ($ret) {
       $Xml = new Xml($ret);
