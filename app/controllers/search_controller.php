@@ -1,6 +1,6 @@
 <?php
 class SearchController extends AppController {
-  public $uses = array('Twitter');
+  public $uses = array('Twitter', 'History');
   public $helpers = array('Twitter');
 
   /**
@@ -17,6 +17,7 @@ class SearchController extends AppController {
     }
 
     if ($this->paginate['conditions']['q']) {
+      $this->History->saveKeyword($this->paginate['conditions']['q']);
       $data = $this->paginate($this->Twitter);
     } else {
       $data = array();
@@ -25,5 +26,12 @@ class SearchController extends AppController {
     $this->set('data', $data);
     $this->set('q', Set::extract('q', $this->params['url']));
     $this->set('title', 'findTwitter');
+  }
+  public function recentElement() {
+    if(!empty($this->params['requested'])) {
+      return $this->History->findRecent10();
+    } else {
+      $this->redirect("index");
+    }
   }
 }

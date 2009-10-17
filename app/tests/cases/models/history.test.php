@@ -91,7 +91,6 @@ class HistoryTestCase extends CakeTestCase {
 	}
 	function test既存のキーワードの更新日付が更新されること() {
 	    $this->assertTrue($this->History->saveKeyword("keyword 11"));
-	    $this->assertError();
 	    $after = $this->History->read(null, 11);
 	    $this->assertNotEqual('2009-10-10 10:10:00', $after['History']['updated']);
 	}
