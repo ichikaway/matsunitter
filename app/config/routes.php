@@ -32,6 +32,7 @@
  * to use (in this case, /app/views/pages/home.ctp)...
  */
 Router::connect('/recent/*', array('controller' => 'search', 'action' => 'recentElement'));
+Router::connect('/popular/*', array('controller' => 'search', 'action' => 'popularElement'));
 Router::connect('/search/*', array('controller' => 'search', 'action' => 'index'));
 Router::connect('/', array('controller' => 'search', 'action' => 'index'));
 

@@ -34,4 +34,11 @@ class SearchController extends AppController {
       $this->redirect("index");
     }
   }
+  public function popularElement() {
+    if(!empty($this->params['requested'])) {
+      return $this->History->findPopular10();
+    } else {
+      $this->redirect("index");
+    }
+  }
 }

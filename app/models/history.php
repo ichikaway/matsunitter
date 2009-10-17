@@ -6,7 +6,8 @@ class History extends AppModel {
 	function findRecent10() {
 	    $result = $this->find('all', array(
 	        'order'=>'updated DESC',
-	        'limit'=>10
+	        'limit'=>10,
+	        'fields'=>array('id', 'name', 'created', 'updated')
 	    ));
 	    return $result;
 	}
@@ -20,9 +21,17 @@ class History extends AppModel {
 	      $result = false;
 	    }
 	    if(!empty($hasAny) || (!$result && $this->hasAny($data[$this->name]))) {
-	        $result = $this->updateAll(array('updated'=>date("'Y-m-d H:i:s'")), $data[$this->name]);
+	        $result = $this->updateAll(array('updated'=>date("'Y-m-d H:i:s'"), 'frequency'=>'frequency + 1'), $data[$this->name]);
 	    }
 	    return $result;
+	}
+	function findPopular10() {
+    $result = $this->find('all', array(
+        'order'=>'frequency DESC',
+        'limit'=>10,
+        'fields'=>array('name')
+    ));
+    return $result;
 	}
 
 }

@@ -27,7 +27,7 @@ class HistoryTestCase extends CakeTestCase {
 			    'name'  => 'keyword 1',
 			    'created'  => '2009-10-10 10:00:00',
 			    'updated'  => '2009-10-10 12:00:00'
-			)),
+			  )),
     	    array('History' => array(
     		    'id'  => 12,
     		    'name'  => 'keyword 12',
@@ -93,6 +93,51 @@ class HistoryTestCase extends CakeTestCase {
 	    $this->assertTrue($this->History->saveKeyword("keyword 11"));
 	    $after = $this->History->read(null, 11);
 	    $this->assertNotEqual('2009-10-10 10:10:00', $after['History']['updated']);
+	}
+	function test人気の10件が検索できること() {
+		$this->History->recursive = -1;
+		$results = $this->History->findPopular10();
+		$this->assertTrue(!empty($results));
+		$this->assertEqual(10, count($results));
+
+		$expected = array(
+		    array('History' => array(
+			    'name'  => 'keyword 12',
+			  )),
+    	    array('History' => array(
+    		    'name'  => 'keyword 11',
+    		)),
+    	    array('History' => array(
+    		    'name'  => 'keyword 10',
+    		)),
+    	    array('History' => array(
+    		    'name'  => 'keyword 9',
+    		)),
+    	    array('History' => array(
+    		    'name'  => 'keyword 8',
+    		)),
+    	    array('History' => array(
+    		    'name'  => 'keyword 7',
+    		)),
+    	    array('History' => array(
+    		    'name'  => 'keyword 5',
+    		)),
+    	    array('History' => array(
+    		    'name'  => 'keyword 4',
+    		)),
+    	    array('History' => array(
+    		    'name'  => 'keyword 3',
+    		)),
+    	    array('History' => array(
+    		    'name'  => 'keyword 2',
+    		))
+		);
+		$this->assertEqual($results, $expected);
+	}
+	function test既存のキーワードのカウントが１アップされること() {
+	    $this->assertTrue($this->History->saveKeyword("keyword 11"));
+	    $after = $this->History->read(null, 11);
+	    $this->assertEqual(12, $after['History']['frequency']);
 	}
 }
 ?>
