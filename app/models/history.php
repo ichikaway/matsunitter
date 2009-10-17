@@ -10,6 +10,15 @@ class History extends AppModel {
 	    ));
 	    return $result;
 	}
+	function saveKeyword($keyword) {
+	    $data = array($this->name => array('name'=>$keyword));
+	    $this->create();
+	    $result = $this->save($data);
+	    if(!$result && $this->hasAny($data[$this->name])) {
+	        $result = $this->updateAll(array('updated'=>date("'Y-m-d H:i:s'")), $data[$this->name]);
+	    }
+	    return $result;
+	}
 
 }
 ?>

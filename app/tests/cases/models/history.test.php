@@ -85,5 +85,15 @@ class HistoryTestCase extends CakeTestCase {
 		);
 		$this->assertEqual($results, $expected);
 	}
+	function test新しいキーワードが登録できること() {
+	    $this->assertTrue($this->History->saveKeyword("新しいキーワード"));
+	    $this->assertEqual(1, $this->History->find('count', array('conditions'=>array('name'=>"新しいキーワード"))));
+	}
+	function test既存のキーワードの更新日付が更新されること() {
+	    $this->assertTrue($this->History->saveKeyword("keyword 11"));
+	    $this->assertError();
+	    $after = $this->History->read(null, 11);
+	    $this->assertNotEqual('2009-10-10 10:10:00', $after['History']['updated']);
+	}
 }
 ?>
